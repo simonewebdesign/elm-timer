@@ -4,7 +4,7 @@ import Task exposing (Task)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
-import Time exposing (Time, timestamp)
+import Time exposing (Time, timestamp, inSeconds)
 import Timer
 
 main : Signal Html
@@ -66,8 +66,8 @@ currentTime =
 
 seconds : Signal Seconds
 seconds =
-  Signal.map2 (-) (Signal.map round currentTime) (Signal.map round initialTimestamp)
-    |> Signal.map (\secs -> toFloat secs / 1000)
+  Signal.map2 (-) currentTime initialTimestamp
+    |> Signal.map inSeconds
     |> Signal.map round
 
 
