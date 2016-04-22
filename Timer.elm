@@ -1,8 +1,5 @@
 module Timer where
 
-import Signal exposing (Address)
-import Task exposing (Task, sleep, andThen)
-
 
 type alias Model = Int
 
