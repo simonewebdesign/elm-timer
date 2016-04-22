@@ -8,7 +8,7 @@ A simple **digital clock** that can either count to a future date or go backward
 
     elm package install simonewebdesign/elm-timer
 
-A couple [examples](https://github.com/simonewebdesign/elm-timer/tree/master/examples) are provided: [simple](https://github.com/simonewebdesign/elm-timer/tree/master/examples/simple) and [startapp](https://github.com/simonewebdesign/elm-timer/tree/master/examples/countdown). The former doesn't use [StartApp](https://github.com/evancz/start-app); the latter does.
+A couple [examples](https://github.com/simonewebdesign/elm-timer/tree/master/examples) are provided: [simple](https://github.com/simonewebdesign/elm-timer/tree/master/examples/simple) and [countdown](https://github.com/simonewebdesign/elm-timer/tree/master/examples/countdown). The former doesn't use [StartApp](https://github.com/evancz/start-app); the latter does.
 
 You can either have a look at the examples or read below to get started.
 
