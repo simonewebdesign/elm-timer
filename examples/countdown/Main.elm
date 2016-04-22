@@ -6,7 +6,6 @@ import Html exposing (..)
 --import Html.Events exposing (onClick)
 import StartApp
 import Effects exposing (Effects, Never)
-import Time exposing (Time)
 import Timer
 --import Signal.Extra exposing ((~>))
 --import Signal.Time exposing (relativeTime)
@@ -30,13 +29,13 @@ main =
 -- MODEL
 
 type alias Model =
-  { counter : Seconds
+  { counter : Int
   }
 
 
 initialModel : Model
 initialModel =
-  { counter = round secondsToEnd
+  { counter = 5
   }
 
 
@@ -69,28 +68,9 @@ view address model =
 
 -- SIGNALS
 
-type alias Seconds = Int
-
-secondsToEnd : Time
-secondsToEnd = 5
-
-
-seconds : Signal Seconds
-seconds =
-  Signal.foldp (+) 0 (Time.every Time.second)
-    |> Signal.map round
-  -- or:
-  --     relativeTime tick ~> Time.inSeconds >> round
-  --
-  -- or:
-  --     Time.every Time.second
-  --       |> relativeTime
-  --       |> Signal.map round
-
-
 inputs : List (Signal Action)
 inputs =
-  [ Signal.map (always UpdateCounter) seconds
+  [ Signal.map (always UpdateCounter) Timer.tick
   ]
 
 

@@ -1,5 +1,7 @@
 module Timer where
 
+import Time exposing (every, second)
+
 
 type alias Model = Int
 
@@ -56,3 +58,16 @@ addLeadingZero num =
     "0" ++ (toString num)
   else
     toString num
+
+
+tick : Signal Model
+tick =
+  Signal.foldp (+) 0 (every second)
+    |> Signal.map round
+  -- or:
+  --     relativeTime tick ~> Time.inSeconds >> round
+  --
+  -- or:
+  --     Time.every Time.second
+  --       |> relativeTime
+  --       |> Signal.map round
