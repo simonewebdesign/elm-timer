@@ -1,5 +1,14 @@
-module Timer where
+module Timer
+  ( Model
+  , init, init'
+  , view
+  , Action, update
+  , addLeadingZero
+  , clock
+  , tick, countdown
+  ) where
 
+import Signal exposing (map, foldp)
 import Time exposing (every, second)
 
 
@@ -60,14 +69,24 @@ addLeadingZero num =
     toString num
 
 
-tick : Signal Model
-tick =
-  Signal.foldp (+) 0 (every second)
-    |> Signal.map round
+clock : Signal Model
+clock =
+  foldp (+) 0 (every second)
+    |> map round
   -- or:
   --     relativeTime tick ~> Time.inSeconds >> round
   --
   -- or:
-  --     Time.every Time.second
+  --     every second
   --       |> relativeTime
-  --       |> Signal.map round
+  --       |> map round
+
+
+tick : Signal Action
+tick =
+  map (always Tick) clock
+
+
+countdown : Signal Action
+countdown =
+  map (always Tock) clock

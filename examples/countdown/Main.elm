@@ -29,13 +29,13 @@ main =
 -- MODEL
 
 type alias Model =
-  { counter : Int
+  { timer : Timer.Model
   }
 
 
 initialModel : Model
 initialModel =
-  { counter = 5
+  { timer = Timer.init' 10
   }
 
 
@@ -43,7 +43,8 @@ initialModel =
 
 type Action
   = NoOp
-  | UpdateCounter
+  | TimerAction Timer.Action
+
 
 update : Action -> Model -> ( Model, Effects Action )
 update action model =
@@ -51,8 +52,8 @@ update action model =
     NoOp ->
       ( model, Effects.none )
 
-    UpdateCounter ->
-      ( { model | counter = if model.counter > 0 then model.counter - 1 else 0 }
+    TimerAction subAction ->
+      ( { model | timer = Timer.update subAction model.timer }
       , Effects.none
       )
 
@@ -62,7 +63,7 @@ update action model =
 view : Address Action -> Model -> Html
 view address model =
   div []
-    [ text <| Timer.view model.counter
+    [ text <| Timer.view model.timer
     ]
 
 
@@ -70,7 +71,7 @@ view address model =
 
 inputs : List (Signal Action)
 inputs =
-  [ Signal.map (always UpdateCounter) Timer.tick
+  [ Signal.map TimerAction Timer.countdown
   ]
 
 
