@@ -2,8 +2,6 @@
 import Signal exposing (Address, Mailbox)
 import Task exposing (Task)
 import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
 import Time exposing (Time, timestamp, inSeconds)
 import Timer
 

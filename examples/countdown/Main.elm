@@ -1,14 +1,9 @@
 
 import Signal exposing (Address, Mailbox)
---import Task exposing (Task)
 import Html exposing (..)
---import Html.Attributes exposing (..)
---import Html.Events exposing (onClick)
 import StartApp
 import Effects exposing (Effects, Never)
 import Timer
---import Signal.Extra exposing ((~>))
---import Signal.Time exposing (relativeTime)
 
 
 app : StartApp.App Model
@@ -73,9 +68,3 @@ inputs : List (Signal Action)
 inputs =
   [ Signal.map TimerAction Timer.countdown
   ]
-
-
--- This demo app is not using tasks
---port tasks : Signal (Task Never ())
---port tasks =
---  app.tasks
