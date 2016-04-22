@@ -21,19 +21,13 @@ view model =
       let
         secs = model % 60
       in
-        if secs < 10 then -- add leading zero
-          "0" ++ (toString secs)
-        else
-          toString secs
+        addLeadingZero secs
 
     minutes =
       let
-        mins = (floor ((toFloat model) / 60.0)) % 60
+        mins = model // 60 % 60
       in
-        if mins < 10 then -- add leading zero
-          "0" ++ (toString mins)
-        else
-          toString mins
+        addLeadingZero mins
   in
     minutes ++ ":" ++ seconds
 
@@ -54,3 +48,11 @@ update action model =
         model - 1
       else
         model
+
+
+addLeadingZero : number -> String
+addLeadingZero num =
+  if num < 10 then
+    "0" ++ (toString num)
+  else
+    toString num

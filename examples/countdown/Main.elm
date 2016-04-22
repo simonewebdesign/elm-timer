@@ -74,13 +74,11 @@ type alias Seconds = Int
 secondsToEnd : Time
 secondsToEnd = 5
 
+
 seconds : Signal Seconds
 seconds =
-  let
-    tick = Time.every Time.second
-  in
-    Signal.foldp (+) 0 tick
-      |> Signal.map round
+  Signal.foldp (+) 0 (Time.every Time.second)
+    |> Signal.map round
   -- or:
   --     relativeTime tick ~> Time.inSeconds >> round
   --
