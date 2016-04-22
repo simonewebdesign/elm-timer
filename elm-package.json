@@ -1,13 +1,15 @@
 {
     "version": "1.0.0",
-    "summary": "helpful summary of your project, less than 80 characters",
-    "repository": "https://github.com/user/project.git",
+    "summary": "A clock/timer/countdown",
+    "repository": "https://github.com/simonewebdesign/elm-timer.git",
     "license": "BSD3",
     "source-directories": [
         ".",
         "../.."
     ],
-    "exposed-modules": [],
+    "exposed-modules": [
+        "Timer"
+    ],
     "dependencies": {
         "elm-lang/core": "3.0.0 <= v < 4.0.0"
     },
