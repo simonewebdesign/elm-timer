@@ -111,7 +111,7 @@ update action model =
 
 {-| Adds a leading zero to a number *only if* it's a single digit.
 
-    addLeadingZero 0 == "0"
+    addLeadingZero 0 == "00"
     addLeadingZero 1 == "01"
     addLeadingZero 12 == "12"
 -}
