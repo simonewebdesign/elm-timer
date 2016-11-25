@@ -2,6 +2,81 @@
 
 A simple **digital clock** that can either count to a future date or go backwards (countdown).
 
+## This project is no longer maintained
+
+You can use it if you're still on Elm 0.16, however if you're using a more recent version of Elm there is an easier way of doing the same thing this library does. For example, for Elm 0.18 ([code taken from the guide](https://guide.elm-lang.org/architecture/effects/time.html)):
+
+``` elm
+import Html exposing (Html)
+import Svg exposing (..)
+import Svg.Attributes exposing (..)
+import Time exposing (Time, second)
+
+
+main =
+  Html.program
+    { init = init
+    , view = view
+    , update = update
+    , subscriptions = subscriptions
+    }
+
+
+-- MODEL
+
+type alias Model = Time
+
+
+init : (Model, Cmd Msg)
+init =
+  (0, Cmd.none)
+
+
+-- UPDATE
+
+type Msg
+  = Tick Time
+
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    Tick newTime ->
+      (newTime, Cmd.none)
+
+
+-- SUBSCRIPTIONS
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Time.every second Tick
+
+
+-- VIEW
+
+view : Model -> Html Msg
+view model =
+  let
+    angle =
+      turns (Time.inMinutes model)
+
+    handX =
+      toString (50 + 40 * cos angle)
+
+    handY =
+      toString (50 + 40 * sin angle)
+  in
+    svg [ viewBox "0 0 100 100", width "300px" ]
+      [ circle [ cx "50", cy "50", r "45", fill "#0B79CE" ] []
+      , line [ x1 "50", y1 "50", x2 handX, y2 handY, stroke "#023963" ] []
+      ]
+```
+
+Below you'll find instructions to set up this library, in case you're still interested.
+
+---
+
+
 ## Getting started
 
 **No dependencies** are required. Just grab the package and you're good to go.
